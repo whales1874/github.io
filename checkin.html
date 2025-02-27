@@ -3,216 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上海月和纪民宿指南</title>
+    <title>上海月和纪民宿指南｜完整版</title>
     <style>
-        /* 基础样式 */
+        /* 小红书风格样式 */
+        :root {
+            --main-color: #FF6B6B;
+            --sub-color: #4ECDC4;
+            --text-dark: #2D3436;
+            --bg-light: #FFF5F5;
+        }
+
         body {
-            font-family: '微软雅黑', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif;
+            background: var(--bg-light);
             line-height: 1.6;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
         }
 
-        /* 主内容容器 */
-        .container {
+        .card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
         }
 
-        /* 标题样式 */
         h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
+            color: var(--text-dark);
+            font-size: 26px;
+            margin: 0 0 25px;
+            display: flex;
+            align-items: center;
         }
 
-        /* 按钮通用样式 */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
+        h1::before {
+            content: '🏡';
+            margin-right: 10px;
         }
 
-        /* 交互按钮样式 */
-        .interactive-btn {
-            background: #3498db;
-            color: white;
-        }
-
-        .interactive-btn:hover {
-            background: #2980b9;
-        }
-
-        /* 返回按钮样式 */
-        .back-btn {
-            background: #95a5a6;
-            margin-top: 20px;
-        }
-
-        /* 重点信息样式 */
-        .highlight {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        /* 隐藏详细信息容器 */
-        .detail-content {
-            display: none;
-        }
-
-        /* 时间表样式 */
-        .schedule {
-            background: #f8f9fa;
-            padding: 15px;
-            border-left: 4px solid #3498db;
+        .info-section {
+            padding: 20px;
+            background: #F8F9FA;
+            border-radius: 12px;
             margin: 15px 0;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--main-color), #FF8787);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .detail-panel {
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight {
+            color: var(--main-color);
+            font-weight: 600;
+            background: #FFF1F1;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .back-btn {
+            background: var(--sub-color);
+            margin-top: 25px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 主界面内容 -->
-        <div id="main-content">
-            <h1>上海月和纪民宿入住指南</h1>
-            
-            <!-- WiFi信息 -->
-            <section>
-                <h2>📶 WiFi连接</h2>
-                <p>名称：<span class="highlight">YueHeJi</span></p >
-                <p>密码：<span class="highlight">88888888</span>（8个8）</p >
-            </section>
+    <!-- 主界面 -->
+    <div class="card" id="mainCard">
+        <h1>上海月和纪民宿入住指南</h1>
 
-            <!-- 地址信息 -->
-            <section>
-                <h2>📍 地址信息</h2>
-                <p>外卖/打车/快递地址：<br>
-                <span class="highlight">上海市浦东新区川沙新镇其成村新生201号<br>
-                上海月和纪度假民宿（六奉公路店）</span></p >
-                <p class="highlight">※ 分店较多，请务必确认地址</p >
-            </section>
-
-            <!-- 重要时间 -->
-            <section>
-                <h2>⏰ 重要时间</h2>
-                <div class="schedule">
-                    <p>早餐时间：6:30～9:00</p >
-                    <p>入住时间：14点后</p >
-                    <p>退房时间：中午12点前</p >
-                </div>
-            </section>
-
-            <!-- 交互按钮区域 -->
-            <button class="btn interactive-btn" onclick="showDetail('disney')">
-                迪士尼乐园班车时刻
-            </button>
-            <button class="btn interactive-btn" onclick="showDetail('chuanSha')">
-                川沙地铁站班车时刻
-            </button>
-            <button class="btn interactive-btn" onclick="showDetail('airport')">
-                浦东机场班车时刻
-            </button>
-
-            <!-- 注意事项 -->
-            <section style="margin-top:30px;">
-                <h2>⚠️ 注意事项</h2>
-                <ul>
-                    <li>室内禁烟</li>
-                    <li>22:00后请保持安静</li>
-                    <li>外卖垃圾请投放到大厅黑色垃圾桶</li>
-                </ul>
-            </section>
+        <!-- WiFi信息 -->
+        <div class="info-section">
+            <h2>📶 WiFi连接</h2>
+            <p>名称：<span class="highlight">YueHeJi</span></p >
+            <p>密码：<span class="highlight">88888888</span>（8个8）</p >
         </div>
 
-        <!-- 迪士尼班车详情 -->
-        <div id="disney-detail" class="detail-content">
-            <h2>🚌 迪士尼乐园接送班车</h2>
-            <div class="schedule">
-                <p>车程：约20分钟车程 + 10分钟步行</p >
-                <h3>早班车（送至）</h3>
-                <p>第一趟：7:10</p >
-                <p>第二趟：8:10</p >
-                <h3>晚班车（接回）</h3>
-                <p>※ 当天下午前台会微信预约</p >
-            </div>
-            
-            <h3>特别注意：</h3>
-            <ul>
-                <li>双人大童车需联系商家送至停车场</li>
-                <li>小型童车可带上大巴</li>
-                <li>如错过班车可打车至迪士尼3号口</li>
-            </ul>
-            <button class="btn back-btn" onclick="backToMain()">返回主界面</button>
+        <!-- 地址信息 -->
+        <div class="info-section">
+            <h2>📍 地址信息</h2>
+            <p>外卖/打车/快递地址：</p >
+            <p class="highlight">上海市浦东新区川沙新镇其成村新生201号<br>
+            上海月和纪度假民宿（六奉公路店）</p >
+            <p class="highlight">※ 分店较多，请务必确认地址</p >
         </div>
 
-        <!-- 川沙地铁站详情 -->
-        <div id="chuanSha-detail" class="detail-content">
-            <h2>🚇 川沙地铁站班车</h2>
-            <div class="schedule">
-                <h3>送站班车（8:25-11:25）</h3>
-                <p>每小时25分发车</p >
-                <h3>接站班车（14:30-22:30）</h3>
-                <p>每小时30分发车</p >
-            </div>
-            
-            <h3>地铁沿线景点：</h3>
-            <ul>
-                <li>陆家嘴：东方明珠塔</li>
-                <li>南京东路：外滩</li>
-                <li>人民广场：可换乘1号线</li>
-            </ul>
-            <button class="btn back-btn" onclick="backToMain()">返回主界面</button>
+        <!-- 重要时间 -->
+        <div class="info-section">
+            <h2>⏰ 重要时间</h2>
+            <p>早餐时间：6:30～9:00</p >
+            <p>入住时间：14点后</p >
+            <p>退房时间：中午12点前</p >
         </div>
 
-        <!-- 机场班车详情 -->
-        <div id="airport-detail" class="detail-content">
-            <h2>✈️ 浦东机场班车</h2>
-            <div class="schedule">
-                <h3>送机班车（5:25-11:25）</h3>
-                <p>每小时25分发车</p >
-                <h3>接机班车（13:30-23:30）</h3>
-                <p>每小时30分发车</p >
-            </div>
-            
-            <h3>重要提示：</h3>
+        <!-- 交互按钮 -->
+        <button class="action-btn" onclick="showDetail('disney')">
+            🚌 迪士尼班车时刻
+        </button>
+        <button class="action-btn" onclick="showDetail('chuanSha')">
+            🚇 川沙地铁站班车
+        </button>
+        <button class="action-btn" onclick="showDetail('airport')">
+            ✈️ 浦东机场班车
+        </button>
+
+        <!-- 注意事项 -->
+        <div class="info-section">
+            <h2>⚠️ 注意事项</h2>
             <ul>
-                <li>需提前5分钟候车</li>
-                <li>建议预留40分钟机场时间</li>
-                <li>错过班车可打车（约30分钟）</li>
+                <li>室内禁烟 🚭</li>
+                <li>22:00后请保持安静 🤫</li>
+                <li>外卖垃圾请投至【大厅黑色垃圾桶】🗑️</li>
             </ul>
-            <button class="btn back-btn" onclick="backToMain()">返回主界面</button>
         </div>
     </div>
 
+    <!-- 迪士尼班车详情 -->
+    <div class="card detail-panel" id="disneyDetail">
+        <h2>🎢 迪士尼班车详情</h2>
+        <div class="info-section">
+            <h3>🚌 班车时刻</h3>
+            <p>早班车〈送至唐老鸭停车场〉</p >
+            <p>第一趟：7:10</p >
+            <p>第二趟：8:10</p >
+            <p>晚班车〈接回〉通过微信预约</p >
+        </div>
+
+        <div class="info-section">
+            <h3>💡 重要提示</h3>
+            <p>1. 童车注意事项：</p >
+            <p>🚗 双人大童车需联系商家送至停车场</p >
+            <p>🚲 小型童车可直接带上大巴</p >
+            <p>2. 错过班车解决方案：</p >
+            <p>🚕 打车至迪士尼3号口（步行10分钟入园）</p >
+        </div>
+        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
+    </div>
+
+    <!-- 川沙地铁站详情 -->
+    <div class="card detail-panel" id="chuanShaDetail">
+        <h2>🚇 川沙地铁站班车</h2>
+        <div class="info-section">
+            <h3>⏱️ 班车时刻</h3>
+            <p>〔送〕川沙站 8:25-11:25</p >
+            <p>▶ 每小时25分发车</p >
+            <p>〔接〕川沙站 14:30-22:30</p >
+            <p>▶ 每小时30分发车</p >
+        </div>
+
+        <div class="info-section">
+            <h3>🚇 地铁沿线指引</h3>
+            <p>2号线途经：</p >
+            <p>🏙️ 陆家嘴：东方明珠塔</p >
+            <p>🌉 南京东路：外滩景区</p >
+            <p>🏛️ 人民广场：换乘1号线</p >
+        </div>
+        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
+    </div>
+
+    <!-- 浦东机场详情 -->
+    <div class="card detail-panel" id="airportDetail">
+        <h2>✈️ 浦东机场班车</h2>
+        <div class="info-section">
+            <h3>⏱️ 班车时刻</h3>
+            <p>〔送〕浦东机场 5:25-11:25</p >
+            <p>▶ 每小时25分发车</p >
+            <p>〔接〕浦东机场 13:30-23:30</p >
+            <p>▶ 每小时30分发车</p >
+        </div>
+
+        <div class="info-section">
+            <h3>⚠️ 重要提示</h3>
+            <p>1. 提前候车：</p >
+            <p>⏳ 需提前5分钟到达候车点</p >
+            <p>2. 时间预留：</p >
+            <p>🕒 建议提前40分钟到达机场</p >
+            <p>3. 应急方案：</p >
+            <p>🚖 打车至民宿约30分钟</p >
+        </div>
+        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
+    </div>
+
     <script>
-        // 显示详细信息函数
+        // 显示详细信息
         function showDetail(type) {
             // 隐藏主界面
-            document.getElementById('main-content').style.display = 'none';
-            
-            // 显示对应详细信息
-            document.getElementById(`${type}-detail`).style.display = 'block';
+            document.getElementById('mainCard').style.display = 'none';
+            // 显示对应详情
+            document.getElementById(`${type}Detail`).style.display = 'block';
         }
 
-        // 返回主界面函数
+        // 返回主界面
         function backToMain() {
-            // 隐藏所有详细信息
-            document.querySelectorAll('.detail-content').forEach(el => {
-                el.style.display = 'none';
+            // 隐藏所有详情
+            document.querySelectorAll('.detail-panel').forEach(panel => {
+                panel.style.display = 'none';
             });
-            
             // 显示主界面
-            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('mainCard').style.display = 'block';
         }
     </script>
 </body>
