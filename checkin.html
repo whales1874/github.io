@@ -3,231 +3,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上海月和纪民宿指南｜完整版</title>
+    <title>🏡上海月和纪民宿入住指南✨</title>
     <style>
-        /* 小红书风格样式 */
         :root {
-            --main-color: #FF6B6B;
-            --sub-color: #4ECDC4;
-            --text-dark: #2D3436;
-            --bg-light: #FFF5F5;
+            --primary: #FF4F6D;
+            --secondary: #6B8E23;
         }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif;
-            background: var(--bg-light);
+            font-family: "Microsoft YaHei", sans-serif;
             line-height: 1.6;
+            margin: 0;
             padding: 20px;
+            background: #FFF8F7;
+        }
+        .container {
             max-width: 800px;
             margin: 0 auto;
         }
-
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
         .card {
             background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            color: var(--text-dark);
-            font-size: 26px;
-            margin: 0 0 25px;
-            display: flex;
-            align-items: center;
-        }
-
-        h1::before {
-            content: '🏡';
-            margin-right: 10px;
-        }
-
-        .info-section {
-            padding: 20px;
-            background: #F8F9FA;
             border-radius: 12px;
+            padding: 20px;
             margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+/* 新增卡片样式 */
+.info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
 
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+.info-card.accent {
+    border-color: var(--secondary);
+    background: #f8fff8;
+}
+
+.info-card.warning {
+    border-color: #ffb300;
+    background: #fff8e5;
+}
+
+.info-card.danger {
+    border-color: #ff1744;
+    background: #ffebee;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.info-card h3 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 17px;
+}
+
+.info-card h4 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.card-content p {
+    margin: 8px 0;
+    padding-left: 10px;
+    border-left: 2px solid #eee;
+}
+
+/* 小卡片网格布局 */
+.info-card-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.info-card.small {
+    padding: 12px;
+    border-width: 3px;
+}
+
+.info-card.small .card-icon {
+    font-size: 20px;
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .info-card-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-content p {
+        font-size: 14px;
+    }
+}
+        
+.highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .interactive-btn {
+            display: block;
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--main-color), #FF8787);
+            padding: 12px;
+            margin: 10px 0;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-size: 16px;
-            margin: 12px 0;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: 0.3s;
         }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
+        .interactive-btn:hover {
+            opacity: 0.9;
         }
-
-        .detail-panel {
+        .details-panel {
             display: none;
-            animation: slideIn 0.3s ease;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .highlight {
-            color: var(--main-color);
-            font-weight: 600;
-            background: #FFF1F1;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
         .back-btn {
-            background: var(--sub-color);
-            margin-top: 25px;
+            background: var(--secondary) !important;
+        }
+        .emphasize {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .status-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        .available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .soldout {
+            background: #ffebee;
+            color: #c62828;
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 主界面 -->
-    <div class="card" id="mainCard">
-        <h1>月和纪民宿入住指南</h1>
+    <div class="container">
+        <!-- 主界面 -->
+        <div id="main">
+            <h1>🏡上海月和纪民宿入住指南✨</h1>
+            
+            <div class="card">
+                <p style="text-align:center;color:var(--secondary);">🎉感谢您选择月和纪民宿!🎉</p>
+            </div>
 
-        <!-- WiFi信息 -->
-        <div class="info-section">
-            <h2>📶 WiFi连接</h2>
-            <p>名称：<span class="highlight">YueHeJi</span></p >
-            <p>密码：<span class="highlight">88888888</span>（8个8）</p >
+            <div class="card">
+                <p>🍳早餐时间:6:30~9:30<br>
+                🏛用餐地点:前台大厅<br>
+                🎫>>>凭早餐券领取,另需购买¥10/份<br>
+                ⏳我们将为您保留基础餐食至早上10:00，请及时领取</p>
+                
+                <p>🕛退房时间:次日中午12点前<br>
+                🔄*如需续住，请提前一天联系前台确认*</p>
+                
+                <p>⚠️注意事项<br>
+                🗑️>>*外卖餐盒等垃圾可以扔到前台客厅黑色大垃圾桶内<br>
+                🚷>>*楼梯间禁止追逐打闹，22:00后请勿在房间和公共区域大声喧哗<br>
+                🚭>>*室内禁止吸烟<br>
+                🛏>>*床上用品默认一客一换</p>
+                
+                <p>📦外卖/🚖打车地址:<br>
+                月和纪民宿<span class="highlight">(六奉公路分店)</span><br>
+                *民宿内外卖、打车都很方便，分店较多，请务必确认地址，我们是六奉公路分店*</p>
+                
+                <button class="interactive-btn" onclick="showPanel('notice')">📖点击查看详细入住须知</button>
+            </div>
+
+            <div class="card">
+                <p>🚌以下班车均需预约，临时无法安排，敬请谅解!点击了解详情 ↓</p>
+                <button class="interactive-btn" onclick="showPanel('disney')">🎢迪士尼乐园接送巴士时刻</button>
+                <button class="interactive-btn" onclick="showPanel('chuan')">🚇川沙地铁站接送巴士时刻</button>
+                <button class="interactive-btn" onclick="showPanel('airport')">✈️浦东机场接送巴士时刻</button>
+                <p style="margin-top:15px;"><span class="highlight">🗝️上车暗号:告诉师傅您去"鹿吉路月和纪"</span></p>
+            </div>
+
+            <div class="card">
+                <button class="interactive-btn" onclick="showPanel('safety')">🛡️安全守则及免责声明</button>
+                <button class="interactive-btn" onclick="showPanel('shop')">🛍️月和纪小店</button>
+                <button class="interactive-btn" onclick="showPanel('feedback')">💡意见与建议</button>
+            </div>
         </div>
 
-        <!-- 地址信息 -->
-        <div class="info-section">
-            <h2>📍 地址信息</h2>
-            <p>外卖/打车/快递地址：</p >
-            <p>导航直接搜索：<br>
-            上海月和纪度假民宿（六奉公路店）</p >
-            <p class="highlight">※ 民宿内打车、外卖都很方便，分店较多，请务必确认地址</p >
+        <!-- 详细内容面板 -->
+<!-- 修改后的详细入住须知面板 -->
+<div id="notice" class="details-panel">
+    <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+    <h2>📋详细入住指南</h2>
+    
+    <!-- 行李相关 -->
+    <div class="info-card">
+        <div class="card-header">
+            <span class="card-icon">🧳</span>
+            <h3>行李服务</h3>
         </div>
-
-        <!-- 重要时间 -->
-        <div class="info-section">
-            <h2>⏰ 重要时间</h2>
-            <p>早餐时间：6:30～9:00</p >
-            <p>入住时间：14点后</p >
-            <p>退房时间：中午12点前</p >
-        </div>
-
-        <!-- 交互按钮 -->
-        <button class="action-btn" onclick="showDetail('disney')">
-            🚌 迪士尼班车时刻
-        </button>
-        <button class="action-btn" onclick="showDetail('chuanSha')">
-            🚇 川沙地铁站班车时刻
-        </button>
-        <button class="action-btn" onclick="showDetail('airport')">
-            ✈️ 浦东机场班车时刻
-        </button>
-
-        <!-- 注意事项 -->
-        <div class="info-section">
-            <h2>⚠️ 注意事项</h2>
-            <ul>
-                <li>室内禁烟 🚭</li>
-                <li>22:00后请保持安静 🤫</li>
-                <li>外卖垃圾请投至【大厅黑色垃圾桶】🗑️</li>
-            </ul>
+        <div class="card-content">
+            <p>🔄次日换房的客人，请您提前整理好行李放在房间并告知前台即可</p>
+            <p>🧳寄存行李请拿到大厅放置并拍照给前台微信</p>
         </div>
     </div>
 
-    <!-- 迪士尼班车详情 -->
-    <div class="card detail-panel" id="disneyDetail">
-        <h2>🎢 迪士尼班车详情</h2>
-        <div class="info-section">
-            <h3>🚌 班车时刻</h3>
-            <p>早班车〈送至唐老鸭停车场〉</p >
-            <p>第一趟：7:10</p >
-            <p>第二趟：8:10</p >
-            <p>晚班车〈接回〉通过微信预约</p >
+    <!-- 退房政策 -->
+    <div class="info-card accent">
+        <div class="card-header">
+            <span class="card-icon">⏳</span>
+            <h3>退房规定</h3>
         </div>
-
-        <div class="info-section">
-            <h3>💡 重要提示</h3>
-            <p>1. 童车注意事项：</p >
-            <p>🚗 双人大童车需联系商家送至停车场</p >
-            <p>🚲 小型童车可直接带上大巴</p >
-            <p>2. 错过班车解决方案：</p >
-            <p>🚕 打车至迪士尼3号口（步行10分钟入园）</p >
+        <div class="card-content">
+            <p>⏳延迟退房需联系前台确认，若房间次日有预订则无法延迟</p>
+            <p>💰收费标准：60元/小时，超过4小时按全天房费收取</p>
         </div>
-        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
     </div>
 
-    <!-- 川沙地铁站详情 -->
-    <div class="card detail-panel" id="chuanShaDetail">
-        <h2>🚇 川沙地铁站班车</h2>
-        <div class="info-section">
-            <h3>⏱️ 班车时刻</h3>
-            <p>〔送〕川沙站 8:25-11:25</p >
-            <p>▶ 每小时25分发车</p >
-            <p>〔接〕川沙站 14:30-22:30</p >
-            <p>▶ 每小时30分发车</p >
+    <!-- 基础规定 -->
+    <div class="info-card-grid">
+        <!-- 入住要求 -->
+        <div class="info-card small">
+            <div class="card-header">
+                <span class="card-icon">🆔</span>
+                <h4>基本规则</h4>
+            </div>
+            <p>所有入住人均需出示身份证原件登记</p>
+            <p>根据消防部门规定，每个房间入住上限为平台标明的人数（可加一位6岁以下儿童）</br>
+                   请确认好入住人数，以免耽误您的行程安排。</p>
+        </div>
+ 
+<!-- 餐饮政策 -->
+        <div class="info-card small">
+            <div class="card-header">
+            <span class="card-icon">🎫</span>
+            <h4>早餐券规则</h4>
+        </div>
+            <p>🎫早餐券不设折现、退换、找零</p>
+            <p>📅有效期至用餐当天，过期作废</p>
         </div>
 
-        <div class="info-section">
-            <h3>🚇 地铁沿线指引</h3>
-            <p>2号线途经：</p >
-            <p>🏙️ 陆家嘴：东方明珠塔</p >
-            <p>🌉 南京东路：外滩景区</p >
-            <p>🏛️ 人民广场：换乘1号线</p >
+        <!-- 禁烟政策 -->
+        <div class="info-card small">
+            <div class="card-header">
+                <span class="card-icon">🚭</span>
+                <h4>禁烟规定</h4>
+            </div>
+            <p>室内禁烟，抽烟请移步室外</p>
         </div>
-        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
+
+        <!-- 公共区域 -->
+        <div class="info-card small">
+            <div class="card-header">
+                <span class="card-icon">🌙</span>
+                <h4>安静时段</h4>
+            </div>
+            <p>客厅区域23:30后熄灯，21点后请勿大声喧哗</p>
+        </div>
     </div>
 
-    <!-- 浦东机场详情 -->
-    <div class="card detail-panel" id="airportDetail">
-        <h2>✈️ 浦东机场班车</h2>
-        <div class="info-section">
-            <h3>⏱️ 班车时刻</h3>
-            <p>〔送〕浦东机场 5:25-11:25</p >
-            <p>▶ 每小时25分发车</p >
-            <p>〔接〕浦东机场 13:30-23:30</p >
-            <p>▶ 每小时30分发车</p >
+    <!-- 设施使用 -->
+    <div class="info-card warning">
+        <div class="card-header">
+            <span class="card-icon">🎤</span>
+            <h3>设施使用限制</h3>
+        </div>
+        <div class="card-content">
+            <p>🎤KTV、麻将桌等设施仅对整栋包场开放使用</p>
+            <p>🐾不可携带宠物入住</p>
+        </div>
+    </div>
+
+    <!-- 安全提示 -->
+    <div class="info-card-grid">
+        <div class="info-card small danger">
+            <div class="card-header">
+                <span class="card-icon">⚠️</span>
+                <h4>拖鞋使用</h4>
+            </div>
+            <p>👡一次性拖鞋仅限干区使用，淋浴请穿塑胶拖鞋</p>
         </div>
 
-        <div class="info-section">
-            <h3>⚠️ 重要提示</h3>
-            <p>1. 提前候车：</p >
-            <p>⏳ 需提前5分钟到达候车点</p >
-            <p>2. 时间预留：</p >
-            <p>🕒 建议提前40分钟到达机场</p >
-            <p>3. 应急方案：</p >
-            <p>🚖 打车至民宿约30分钟</p >
+        <div class="info-card small danger">
+            <div class="card-header">
+                <span class="card-icon">🐜</span>
+                <h4>防虫提示</h4>
+            </div>
+            <p>户外活动请使用防蚊虫用品，前台提供花露水</p>
         </div>
-        <button class="action-btn back-btn" onclick="backToMain()">⬅️ 返回主界面</button>
+    </div>
+
+    <!-- 特殊服务 -->
+    <div class="info-card">
+        <div class="card-header">
+            <span class="card-icon">💍</span>
+            <h3>特殊布置须知</h3>
+        </div>
+        <div class="card-content">
+            <p>📸商拍需提前预约并商定费用</p>
+            <p>💍求婚/生日布置需提前告知并支付300元清洁费</p>
+            <p>❗造成损坏需照价赔偿</p>
+        </div>
+    </div>
+</div>
+
+
+        <!-- 迪士尼班车 -->
+        <div id="disney" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h2>🎢迪士尼乐园班车时刻</h2>
+            <p>🌅早班车:</p>
+            <p class="emphasize">第一趟:7:10分 🕖</p>
+            <p class="emphasize">第二趟:8:10分 🕗</p>
+            <p>🚌巴士送到唐老鸭停车场大约25分钟车程,下车后步行700米左右入园</p>
+            <p>👶大巴车上只能携带小型的单人童车，如有携带大型双人童车请联系商家在唐老鸭停车场取车,或者打车前往</p>
+            <p class="emphasize">🚕未赶上或不坐大巴，可直接打车到迪士尼地铁站3号口后步行入园</p>
+            <hr>
+            <p>🌃晚班车:</p>
+            <p>🎆具体根据烟花时间调整</p>
+            <p>📱入园当天下午，前台微信会和您确认时间，车牌以及停车位置信息晚上车辆停好后会告知您。</p>
+            <hr>
+            <p>📍晚班车上车点:</p>
+            <p>在唐老鸭停车场(乐园出口到停车场大约需要20分钟，请注意时间安排)</p>
+            <p>💡tips:</p>
+            <p>高峰期如需打车可以前往"荣威桥,在靠近迪士尼方向"或者"米老鼠停车场,在靠近唐老鸭停车场方向"</p>
+        </div>
+
+        <!-- 川沙地铁站 -->
+        <div id="chuan" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h2>🚇川沙地铁站接送巴士时刻</h2>
+            <p>⏰班车是大巴车，发车时刻准时准点，需要提前5-10分钟的时间到达指定地点，切勿踩点</p>
+            <p>🚍〈川沙地铁站免费接送〉</p>
+            <p>⏱️车程约45~55分钟</p>
+            <p class="emphasize">🔼【送】地铁站:8:25~11:25     每个小时的25分一趟，例如8：25、9：25……</p>
+            <p class="emphasize">🔽【接】地铁站:14:30~22:40   每个小时的30分一趟，例如14：30、15：30……</p>
+            <hr>
+            <p>🗺️途径:</p>
+            <p>〈川沙站〉我们接回的站点</p>
+            <p>〈陆家嘴站〉可到东方明珠🗼</p>
+            <p>〈南京东路站〉可到外滩🌉</p>
+            <p>〈南京西路站〉可到自然博物馆🦖</p>
+            <p>〈人民广场站〉可换乘1号线</p>
+        </div>
+
+        <!-- 浦东机场 -->
+        <div id="airport" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h2>✈️浦东机场接送巴士时刻</h2>
+            <p>⏰班车是大巴车，发车时刻准时准点，需要提前5-10分钟的时间，到达指定地点，切勿踩点</p>
+            <p>🚍〈浦东机场免费接送〉</p>
+            <p>⏱️车程约50~60分钟</p>
+            <p class="emphasize">🔼【送】机(需提前一天预约):5:25~11:25      每个小时的25分一趟，例如5：25、6：25……</p>
+            <p class="emphasize">🔽【接】机(需提前3小时预约):13:30~23:30   每个小时的30分一趟，例如13：30、14：30……</p>
+            <hr>
+            <p>💺送机:请至少提前90分钟到达机场登机，预约送机可告知管家航班时间，协助您安排最优车次</p>
+            <p>🧳接机:从下飞机到大巴候车点大约需要30-40分钟</p>
+        </div>
+
+        <!-- 安全守则 -->
+        <div id="safety" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h2>🛡️安全守则及免责声明</h2>
+            <p>🏊泳池使用须知及安全规范</p>
+            <p>⏰*户外泳池开放时段:7月-8月<br>
+               🌅上午:9:30-12:00<br>
+               🌇下午:14:00-21:30</p>
+            <p>👶*儿童必须!必须!在监护人的看护下使用泳池</p>
+            <p>🚫泳池属于住客们共享空间,请文明使用泳池</p>
+            <p>🍴禁止携带玻璃器皿、餐食,饮料进入泳池</p>
+        </div>
+
+        <!-- 月和纪小店 -->
+        <div id="shop" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h3>🛍️月和纪小店（装修中，暂停营业）</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="images/mosquito-spray.jpg" class="product-img" alt="防蚊喷雾">
+                    <h4>🦟防蚊喷雾</h4>
+                    <p>📏规格:100ml</p>
+                    <p>💰价格:￥25</p>
+                    <span class="status-tag available">✅可售</span>
+                </div>
+                <div class="product-card">
+                    <img src="images/slippers.jpg" class="product-img" alt="旅行拖鞋">
+                    <h4>👟旅行拖鞋</h4>
+                    <p>📏规格:均码</p>
+                    <p>💰价格:￥15</p>
+                    <span class="status-tag soldout">❌缺货</span>
+                </div>
+                <div class="product-card">
+                    <img src="images/flower-water.jpg" class="product-img" alt="花露水">
+                    <h4>🌿便携花露水</h4>
+                    <p>📏规格:60ml</p>
+                    <p>💰价格:￥18</p>
+                    <span class="status-tag available">✅可售</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 意见反馈 -->
+        <div id="feedback" class="details-panel">
+            <button class="interactive-btn back-btn" onclick="showMain()">🔙返回主界面</button>
+            <h2>💡意见与建议</h2>
+            <p>📩我们十分重视您的入住体验，有任何意见和建议都可以反馈给前台微信</p>
+        </div>
     </div>
 
     <script>
-        // 显示详细信息
-        function showDetail(type) {
-            // 隐藏主界面
-            document.getElementById('mainCard').style.display = 'none';
-            // 显示对应详情
-            document.getElementById(`${type}Detail`).style.display = 'block';
+        // 显示指定面板，隐藏主界面
+        function showPanel(id){
+            document.getElementById("main").style.display = "none";
+            document.getElementById(id).style.display = "block";
         }
 
-        // 返回主界面
-        function backToMain() {
-            // 隐藏所有详情
-            document.querySelectorAll('.detail-panel').forEach(panel => {
-                panel.style.display = 'none';
+        // 显示主界面，隐藏所有面板
+        function showMain(){
+            document.getElementById("main").style.display = "block";
+            document.querySelectorAll(".details-panel").forEach(panel => {
+                panel.style.display = "none";
             });
-            // 显示主界面
-            document.getElementById('mainCard').style.display = 'block';
+        }
+
+        // 初始隐藏所有详情面板
+        window.onload = function() {
+            document.querySelectorAll(".details-panel").forEach(panel => {
+                panel.style.display = "none";
+            });
         }
     </script>
 </body>
