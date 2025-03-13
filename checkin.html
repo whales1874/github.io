@@ -195,6 +195,16 @@
                 font-size: 20px;
             }
         }
+         /* 新增滑动动画样式 */
+        .details-panel {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .swipe-left {
+            transform: translateX(-100%);
+        }
+        .swipe-right {
+            transform: translateX(100%);
+        }
     </style>
 </head>
 <body>
@@ -485,6 +495,68 @@
         window.onload = function() {
             document.querySelectorAll(".details-panel").forEach(panel => {
                 panel.style.display = "none";
+            });
+        }
+         <script>
+        // 滑动功能实现
+        let touchStartX = 0;
+        let touchStartTime = 0;
+        const SWIPE_THRESHOLD = 60; // 滑动阈值60像素
+        const MAX_VERTICAL_DEVIATION = 30; // 最大垂直偏差
+
+        // 为所有详情面板添加触摸监听
+        document.querySelectorAll('.details-panel').forEach(panel => {
+            panel.addEventListener('touchstart', handleTouchStart, { passive: true });
+            panel.addEventListener('touchmove', handleTouchMove, { passive: false });
+            panel.addEventListener('touchend', handleTouchEnd);
+        });
+
+        function handleTouchStart(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartTime = Date.now();
+        }
+
+        function handleTouchMove(e) {
+            // 阻止垂直滚动
+            if (Math.abs(e.touches[0].clientX - touchStartX) > 10) {
+                e.preventDefault();
+            }
+        }
+
+        function handleTouchEnd(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaX = touchEndX - touchStartX;
+            const deltaTime = Date.now() - touchStartTime;
+            const velocity = Math.abs(deltaX) / deltaTime;
+
+            // 计算垂直偏差
+            const touchStartY = e.changedTouches[0].clientY;
+            const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+
+            // 判断有效滑动
+            if (Math.abs(deltaX) > SWIPE_THRESHOLD && 
+                deltaY < MAX_VERTICAL_DEVIATION && 
+                velocity > 0.3) {
+                
+                const currentPanel = e.currentTarget;
+                
+                // 添加滑动动画
+                currentPanel.classList.add(deltaX > 0 ? 'swipe-right' : 'swipe-left');
+                
+                // 动画完成后返回主界面
+                setTimeout(() => {
+                    showMain();
+                    currentPanel.classList.remove('swipe-left', 'swipe-right');
+                }, 300);
+            }
+        }
+
+        // 修改原有showMain函数
+        function showMain() {
+            document.getElementById("main").style.display = "block";
+            document.querySelectorAll(".details-panel").forEach(panel => {
+                panel.style.display = "none";
+                panel.classList.remove('swipe-left', 'swipe-right');
             });
         }
     </script>
