@@ -195,16 +195,7 @@
                 font-size: 20px;
             }
         }
-         /* 新增滑动动画样式 */
-.details-panel {
-    touch-action: pan-y; /* 允许垂直滚动 */
-    position: relative;
-    z-index: 100;
-    width: 100%;
-    min-height: 100vh;
-    background: white;
-}
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -233,7 +224,6 @@
                 
                 <p>📦外卖/🚖打车地址:<br>
                 月和纪民宿<span class="highlight">(六奉公路分店)</span><br>
-                详细地址：上海市浦东新区川沙新镇其成村新生201、202号<br>
                 *民宿内外卖、打车都很方便，分店较多，请务必确认地址，我们是六奉公路分店*</p>
                 
                 <button class="interactive-btn" onclick="showPanel('notice')">📖点击查看详细入住须知</button>
@@ -292,9 +282,8 @@
                 <span class="card-icon">🆔</span>
                 <h4>基本规则</h4>
             </div>
-            <p>📝所有入住人均需出示身份证原件登记</p>
-            
-            <p>🏡根据消防部门规定，每个房间入住上限为平台标明的人数（可加一位6岁以下儿童）</br>
+            <p>所有入住人均需出示身份证原件登记</p>
+            <p>根据消防部门规定，每个房间入住上限为平台标明的人数（可加一位6岁以下儿童）</br>
                    请确认好入住人数，以免耽误您的行程安排。</p>
         </div>
  
@@ -384,13 +373,14 @@
             <p>👶大巴车上只能携带小型的单人童车，如有携带大型双人童车请联系商家在唐老鸭停车场取车,或者打车前往</p>
             <p class="emphasize">🚕未赶上或不坐大巴，可直接打车到迪士尼地铁站3号口后步行入园</p>
             <hr>
-            <p>🌃晚班车:上车点在【唐老鸭停车场】</p>
+            <p>🌃晚班车:</p>
             <p>🎆具体根据烟花时间调整</p>
             <p>📱入园当天下午，前台微信会和您确认时间，车牌以及停车位置信息晚上车辆停好后会告知您。</p>
             <hr>
+            <p>📍晚班车上车点:</p>
+            <p>在唐老鸭停车场(乐园出口到停车场大约需要20分钟，请注意时间安排)</p>
             <p>💡tips:</p>
-            <p>乐园出口到停车场大约需要20分钟，请注意时间规划；<br>
-            高峰期如需打车可以前往"荣威桥,在靠近迪士尼方向"或者"米老鼠停车场,在靠近唐老鸭停车场方向"</p>
+            <p>高峰期如需打车可以前往"荣威桥,在靠近迪士尼方向"或者"米老鼠停车场,在靠近唐老鸭停车场方向"</p>
         </div>
 
         <!-- 川沙地铁站 -->
@@ -496,51 +486,6 @@
                 panel.style.display = "none";
             });
         }
-// 改进后的滑动逻辑（替换原有script内容）
-let touchStartX = 0;
-let activePanel = null;
-
-document.querySelectorAll('.details-panel').forEach(panel => {
-    // 添加触摸事件
-    panel.addEventListener('touchstart', function(e) {
-        touchStartX = e.touches[0].clientX;
-        activePanel = this;
-    });
-
-    panel.addEventListener('touchend', function(e) {
-        const touchEndX = e.changedTouches[0].clientX;
-        const deltaX = touchEndX - touchStartX;
-        const absDeltaX = Math.abs(deltaX);
-
-        // 触发条件：滑动距离>60px且速度>0.3px/ms
-        if (absDeltaX > 60 && absDeltaX/(Date.now() - touchStartTime) > 0.3) {
-            const direction = deltaX > 0 ? 'right' : 'left';
-            handleSwipe(direction);
-        }
-        activePanel = null;
-    });
-});
-
-function handleSwipe(direction) {
-    if (!activePanel) return;
-
-    // 添加视觉反馈
-    activePanel.style.transition = 'transform 0.3s ease-out';
-    activePanel.style.transform = `translateX(${direction === 'right' ? '100%' : '-100%'})`;
-
-    // 动画完成后执行返回
-    setTimeout(() => {
-        showMain();
-        activePanel.style.transition = '';
-        activePanel.style.transform = '';
-    }, 300);
-}
-
-// 确保原有返回函数正常
-function showMain(){
-    document.getElementById("main").style.display = "block";
-    document.querySelectorAll(".details-panel").forEach(p => p.style.display = "none");
-}
-</script>
+    </script>
 </body>
 </html>
