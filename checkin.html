@@ -196,16 +196,15 @@
             }
         }
          /* 新增滑动动画样式 */
-        .details-panel {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .swipe-left {
-            transform: translateX(-100%);
-        }
-        .swipe-right {
-            transform: translateX(100%);
-        }
-    </style>
+.details-panel {
+    touch-action: pan-y; /* 允许垂直滚动 */
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+}
+</style>
 </head>
 <body>
     <div class="container">
@@ -498,67 +497,51 @@
             });
         }
          <script>
-        // 滑动功能实现
-        let touchStartX = 0;
-        let touchStartTime = 0;
-        const SWIPE_THRESHOLD = 60; // 滑动阈值60像素
-        const MAX_VERTICAL_DEVIATION = 30; // 最大垂直偏差
+// 改进后的滑动逻辑（替换原有script内容）
+let touchStartX = 0;
+let activePanel = null;
 
-        // 为所有详情面板添加触摸监听
-        document.querySelectorAll('.details-panel').forEach(panel => {
-            panel.addEventListener('touchstart', handleTouchStart, { passive: true });
-            panel.addEventListener('touchmove', handleTouchMove, { passive: false });
-            panel.addEventListener('touchend', handleTouchEnd);
-        });
+document.querySelectorAll('.details-panel').forEach(panel => {
+    // 添加触摸事件
+    panel.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        activePanel = this;
+    });
 
-        function handleTouchStart(e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartTime = Date.now();
+    panel.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const deltaX = touchEndX - touchStartX;
+        const absDeltaX = Math.abs(deltaX);
+
+        // 触发条件：滑动距离>60px且速度>0.3px/ms
+        if (absDeltaX > 60 && absDeltaX/(Date.now() - touchStartTime) > 0.3) {
+            const direction = deltaX > 0 ? 'right' : 'left';
+            handleSwipe(direction);
         }
+        activePanel = null;
+    });
+});
 
-        function handleTouchMove(e) {
-            // 阻止垂直滚动
-            if (Math.abs(e.touches[0].clientX - touchStartX) > 10) {
-                e.preventDefault();
-            }
-        }
+function handleSwipe(direction) {
+    if (!activePanel) return;
 
-        function handleTouchEnd(e) {
-            const touchEndX = e.changedTouches[0].clientX;
-            const deltaX = touchEndX - touchStartX;
-            const deltaTime = Date.now() - touchStartTime;
-            const velocity = Math.abs(deltaX) / deltaTime;
+    // 添加视觉反馈
+    activePanel.style.transition = 'transform 0.3s ease-out';
+    activePanel.style.transform = `translateX(${direction === 'right' ? '100%' : '-100%'})`;
 
-            // 计算垂直偏差
-            const touchStartY = e.changedTouches[0].clientY;
-            const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+    // 动画完成后执行返回
+    setTimeout(() => {
+        showMain();
+        activePanel.style.transition = '';
+        activePanel.style.transform = '';
+    }, 300);
+}
 
-            // 判断有效滑动
-            if (Math.abs(deltaX) > SWIPE_THRESHOLD && 
-                deltaY < MAX_VERTICAL_DEVIATION && 
-                velocity > 0.3) {
-                
-                const currentPanel = e.currentTarget;
-                
-                // 添加滑动动画
-                currentPanel.classList.add(deltaX > 0 ? 'swipe-right' : 'swipe-left');
-                
-                // 动画完成后返回主界面
-                setTimeout(() => {
-                    showMain();
-                    currentPanel.classList.remove('swipe-left', 'swipe-right');
-                }, 300);
-            }
-        }
-
-        // 修改原有showMain函数
-        function showMain() {
-            document.getElementById("main").style.display = "block";
-            document.querySelectorAll(".details-panel").forEach(panel => {
-                panel.style.display = "none";
-                panel.classList.remove('swipe-left', 'swipe-right');
-            });
-        }
-    </script>
+// 确保原有返回函数正常
+function showMain(){
+    document.getElementById("main").style.display = "block";
+    document.querySelectorAll(".details-panel").forEach(p => p.style.display = "none");
+}
+</script>
 </body>
 </html>
